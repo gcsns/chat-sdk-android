@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+  <data>
+    <variable
+        name="message"
+        type="com.gc.chatviewsdk.model.Message" />
+    <variable
+        name="callback"
+        type="com.gc.chatviewsdk.model.callback.ListItemClickCallback" />
+  </data>
+  <androidx.constraintlayout.widget.ConstraintLayout
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      android:layout_width="match_parent"
+      android:layout_height="71dp"
+      android:onClick="@{() -> callback.onClick(message)}"
+      android:background="@color/colorWhite">
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/imgChatLead"
+        android:layout_width="@dimen/margin_42"
+        android:layout_height="@dimen/margin_42"
+        android:layout_marginStart="@dimen/margin_12"
+        android:textColor="@color/black"
+        android:src="@drawable/img_new"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="@dimen/margin_14"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+      <androidx.appcompat.widget.AppCompatTextView
+          android:id="@+id/receiveLUserName"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          tools:text="Customer 2"
+          android:text="@{message.strUserName}"
+          android:fontFamily="sans-serif-medium"
+          android:textSize="@dimen/text_size_14"
+          android:textColor="#2c2c2c"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintStart_toEndOf="@+id/lastReceivedMsgTime"
+          app:layout_constraintTop_toTopOf="parent"/>
+      <androidx.appcompat.widget.AppCompatTextView
+          android:id="@+id/lastReceivedMsg"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          tools:text="Congratulations, Your monthly investment (SIP) in…"
+          android:fontFamily="sans-serif-medium"
+          android:textSize="@dimen/text_size_12"
+          android:text="@{message.strLastMessage}"
+          android:textColor="#666666"
+          android:layout_marginTop="3dp"
+          android:maxLines="1"
+          android:ellipsize="end"
+          app:layout_constraintTop_toBottomOf="@+id/receiveLUserName"
+          app:layout_constraintStart_toStartOf="parent"/>
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/lastReceivedMsgTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text ="4:23 pm"
+        android:textColor="#666666"
+        android:textSize="8.7sp"
+        android:layout_marginTop="@dimen/margin_12"
+        android:layout_marginEnd="@dimen/margin_14"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/tab_background_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

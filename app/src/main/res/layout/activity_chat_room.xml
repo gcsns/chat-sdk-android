@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="activity" type="com.gc.chatviewsdk.views.activities.ChatRoomActivity"/>
+        <variable
+            name="handlers"
+            type="com.gc.chatviewsdk.views.activities.ChatRoomActivity.RoomClickHandlers" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.activities.ChatRoomActivity">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:fitsSystemWindows="true">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/colorPrimaryDark"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:contentInsetEnd="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetStartWithNavigation="0dp"
+            app:navigationIcon="@drawable/back_icon"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/profile_picture"
+                    android:layout_width="@dimen/margin_42"
+                    android:layout_height="@dimen/margin_42"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/img_new" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_12"
+                    android:fontFamily="@font/roboto_bold"
+                    android:maxLines="1"
+                    android:text="Dummy 1"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_size_14" />
+            </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="?actionBarSize">
+        <EditText
+            android:id="@+id/tvSender"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:textSize="18sp"
+            android:text="fromUser"/>
+    </FrameLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvChat"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/margin_5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/replyView"
+        app:layout_constraintTop_toBottomOf="@+id/frame"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/replyView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_4"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <LinearLayout
+            android:id="@+id/ll_editBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_bg"
+            android:layout_marginStart="@dimen/margin_8"
+            android:paddingTop="@dimen/margin_4"
+            android:paddingBottom="@dimen/margin_4"
+            android:paddingStart="@dimen/margin_12"
+            android:paddingEnd="@dimen/margin_12"
+            android:layout_marginEnd="62dp"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/sendMessage"
+            >
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edittextChatMessage"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:cursorVisible="true"
+                android:fontFamily="@font/roboto"
+                android:hint="Type a message"
+                android:inputType="textCapSentences|textMultiLine|text|textEmailSubject"
+                android:maxLength="5000"
+                android:minHeight="42dp"
+                android:layout_marginEnd="@dimen/margin_8"
+                android:textAlignment="viewStart"
+                android:textColor="@color/black"
+                android:textColorHint="@color/light_grey"
+                android:textSize="@dimen/text_size_14"/>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/attachImage"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_weight=".1"
+                android:onClick="@{handlers::onAttachClicked}"
+                android:layout_gravity="center_vertical|end"
+                app:srcCompat="@drawable/ic_multimedia_attach"/>
+        </LinearLayout>
+        <requestFocus/>
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/sendMessage"
+            android:layout_width="@dimen/margin_42"
+            android:layout_height="@dimen/margin_42"
+            android:layout_marginEnd="@dimen/margin_8"
+            android:onClick="@{handlers::onSendClicked}"
+            android:background="@drawable/bg_circle"
+            android:src="@drawable/ic_post_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

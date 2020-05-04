@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data >
+        <variable
+            name="message"
+            type="com.gc.chatviewsdk.model.MessageData" />
+        <import type="com.gc.chatviewsdk.utils.MyUtils"/>
+    </data>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginTop="@dimen/margin_5"
+        android:paddingStart="16dp"
+        android:paddingEnd="@dimen/margin_12"
+        android:paddingTop="@dimen/margin_5"
+        android:paddingBottom="@dimen/margin_5"
+        android:background="@drawable/receiver_message">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/message_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{message.getmessageText}"
+            tools:text="sfsffhsfhsfkssfsffhsfhsfkssfsffhsfhsfkssfsffhsfhsfkssfsffhsfhsfkssfsffhsfhsfkssfsffhsfhsfks"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="#333333"
+            android:textSize="@dimen/text_size_14"
+            android:fontFamily="@font/roboto" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/message_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_9"
+            android:fontFamily="@font/roboto"
+            android:layout_marginStart="@dimen/margin_8"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/message_text"
+            android:text="@{MyUtils.convertTime(message.getTime)}"
+            tools:text="11:30 am"/>
+    </RelativeLayout>
+</layout>
