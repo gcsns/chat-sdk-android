@@ -1,22 +1,26 @@
 package com.gc.chatviewsdk.model;
 
 public class MessageData {
-    public static final int TYPE_TEXT = 0;
-    public static final int TYPE_IMAGE = 1;
-    public static final int TYPE_PDF = 2;
+    public enum messageDataType {
+        Text,
+        Image,
+        Pdf
+    }
     private String messageText = "";
     private long time;
     private String fromUserName = "";
     private String fromUserId = "";
     private boolean boolDelivered = true;
-    private int[] Type = {TYPE_TEXT,TYPE_IMAGE,TYPE_PDF};
+    private messageDataType messageType;
 
-    public MessageData(String messageText, long time, String fromUserName, String fromUserId, boolean boolDelivered, int type) {
+
+    public MessageData(String messageText, long time, String fromUserName, String fromUserId, boolean boolDelivered, messageDataType messageType) {
         this.messageText = messageText;
         this.time = time;
         this.fromUserName = fromUserName;
         this.fromUserId = fromUserId;
         this.boolDelivered = boolDelivered;
+        this.messageType = messageType;
     }
 
     public String getmessageText() {
@@ -36,9 +40,6 @@ public class MessageData {
     }
 
 
-    public static int getTypeText() {
-        return TYPE_TEXT;
-    }
 
     public String getFromUserName() {
         return fromUserName;
@@ -56,14 +57,6 @@ public class MessageData {
         this.fromUserId = fromUserId;
     }
 
-    public int[] getType() {
-        return Type;
-    }
-
-    public void setType(int[] type) {
-        Type = type;
-    }
-
     public boolean isBoolDelivered() {
         return boolDelivered;
     }
@@ -71,4 +64,9 @@ public class MessageData {
     public void setBoolDelivered(boolean boolDelivered) {
         this.boolDelivered = boolDelivered;
     }
+
+    public MessageData.messageDataType getMessageType() {
+        return messageType;
+    }
+
 }

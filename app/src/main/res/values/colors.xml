@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#075e54</color>
     <color name="colorAccent">#2b86d8</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorWhiteLight">#FAFAFA</color>
     <color name="black">#000000</color>
     <color name="tab_background_color">#ede6de</color>
     <color name="light_grey">#d7d7d7</color>

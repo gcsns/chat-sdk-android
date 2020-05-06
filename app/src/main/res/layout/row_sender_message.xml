@@ -3,25 +3,31 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <data >
+        <import type="android.view.View"/>
         <variable
             name="message"
             type="com.gc.chatviewsdk.model.MessageData" />
         <import type="com.gc.chatviewsdk.utils.MyUtils"/>
-
+        <import type="com.gc.chatviewsdk.model.ImageMessageData"/>
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="@dimen/margin_5">
-        <RelativeLayout
+        android:orientation="vertical"
+        android:layout_marginEnd="15dp">
+        <LinearLayout
+            android:id="@+id/linMessageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="16dp"
             android:paddingEnd="@dimen/margin_12"
+            android:orientation="vertical"
             android:paddingTop="@dimen/margin_5"
             android:paddingBottom="@dimen/margin_5"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="end"
+            android:visibility="@{message.messageType == message.messageType.Text? View.VISIBLE: View.GONE}"
             android:background="@drawable/sender_message"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
@@ -31,24 +37,98 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
+                android:layout_gravity="end"
                 android:text="@{message.getmessageText}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/text_size_14"
-                tools:text="ffhsfhsfks" />
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/message_time"
+                android:lineSpacingExtra="@dimen/margin_3"
+                tools:text="ffhs" />
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_9"
-                android:fontFamily="@font/roboto"
-                android:textColor="@color/colorWhite"
-                android:layout_alignEnd="@+id/message_text"
-                android:layout_marginStart="@dimen/margin_8"
-                android:layout_below="@+id/message_text"
-                android:text="@{MyUtils.convertTime(message.getTime)}"
-                tools:text="11:30 am"/>
-        </RelativeLayout>
+                android:layout_gravity="end"
+                android:orientation="horizontal">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/message_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_9"
+                    android:layout_marginEnd="2dp"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/colorWhite"
+                    android:text="@{MyUtils.convertTime(message.getTime)}"
+                    tools:text="11:30 am"/>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/receivedStatus"
+                    android:layout_width="16dp"
+                    android:layout_height="@dimen/margin_14"
+                    android:visibility="@{message.isBoolDelivered?View.VISIBLE:View.GONE}"
+                    app:srcCompat="@drawable/ic_received"/>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/sentStatus"
+                    android:layout_width="16dp"
+                    android:layout_height="@dimen/margin_14"
+                    android:visibility="@{message.isBoolDelivered?View.GONE:View.VISIBLE}"
+                    app:srcCompat="@drawable/ic_sent"/>
+            </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+        <FrameLayout
+            android:id="@+id/frameImageView"
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+            android:visibility="@{message.messageType == message.messageType.Image? View.VISIBLE: View.GONE}"
+            android:padding="@dimen/margin_4"
+            android:layout_marginStart="@dimen/margin_14"
+            android:layout_marginTop="@dimen/margin_5"
+            android:layout_gravity="end"
+            android:background="@drawable/bg_stroke_image">
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgSender"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src='@{(message instanceof ImageMessageData)?((ImageMessageData)message).getImgUri().toString():""}'
+                    tools:src="@drawable/img_new"
+                    android:scaleType="centerCrop"/>
+                <ProgressBar
+                    android:id="@+id/imgLoadProg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginBottom="@dimen/margin_4"
+                    android:layout_marginEnd="@dimen/margin_4"
+                    android:orientation="horizontal">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvImageTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size_9"
+                        android:layout_marginEnd="2dp"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="@color/colorWhite"
+                        android:text="@{MyUtils.convertTime(message.getTime)}"
+                        tools:text="11:30 am"/>
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgReceiveStatus"
+                        android:layout_width="16dp"
+                        android:layout_height="@dimen/margin_14"
+                        android:visibility="@{message.isBoolDelivered?View.VISIBLE:View.GONE}"
+                        app:srcCompat="@drawable/ic_received"/>
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgReceiveSent"
+                        android:layout_width="16dp"
+                        android:layout_height="@dimen/margin_14"
+                        android:visibility="@{message.isBoolDelivered?View.GONE:View.VISIBLE}"
+                        app:srcCompat="@drawable/ic_sent"/>
+                </LinearLayout>
+
+        </FrameLayout>
+
+    </LinearLayout>
 </layout>

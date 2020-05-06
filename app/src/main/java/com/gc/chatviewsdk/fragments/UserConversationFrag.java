@@ -72,7 +72,10 @@ public class UserConversationFrag extends Fragment {
     }
 
     private final ListItemClickCallback listItemClickCallback = messages -> {
-        startActivity(new Intent(this.getContext(), ChatRoomActivity.class));
+        Intent openChatRoom = new Intent(this.getContext(), ChatRoomActivity.class);
+        openChatRoom.putExtra("userName",messages.getStrUserName());
+        openChatRoom.putExtra("userIcon",messages.getStrUserIcon());
+        startActivity(openChatRoom);
     };
 
 }

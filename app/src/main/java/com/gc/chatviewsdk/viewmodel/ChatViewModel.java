@@ -25,28 +25,35 @@ public class ChatViewModel extends AndroidViewModel {
                     "Danish",
                     "12345",
                     true,
-                    MessageData.TYPE_TEXT));
+                    MessageData.messageDataType.Text));
             messageDataArrayList.add(new MessageData(
-                    "Hello! Can you please send my bank statement?",
-                    1588216097,
+                    "Here is my Image which I have provided",
+                    1588216067,
                     "Danish",
                     "12345",
                     true,
-                    MessageData.TYPE_TEXT));
+                    MessageData.messageDataType.Text));
+            messageDataArrayList.add(new MessageData(
+                    "",
+                    1588226067,
+                    "Danish",
+                    "12345",
+                    true,
+                    MessageData.messageDataType.Image));
             messageDataArrayList.add(new MessageData(
                     "Sorry for late reply",
                     1588288167,
                     "fromUser",
                     "fromUser",
                     true,
-                    MessageData.TYPE_TEXT));
+                    MessageData.messageDataType.Text));
             messageDataArrayList.add(new MessageData(
-                    "Sending you asap on your mail. Please check and revert me back",
-                    1588288169,
-                    "fromUser",
-                    "fromUser",
-                    true,
-                    MessageData.TYPE_TEXT));
+                    "I am grateful to you",
+                    1588571399,
+                    "Avesh",
+                    "4644687",
+                    false,
+                    MessageData.messageDataType.Text));
         }
         return messageDataArrayList;
     }
